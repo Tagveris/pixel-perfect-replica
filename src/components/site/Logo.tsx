@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 
-import symbol from "@/assets/tagveris-symbol.png.asset.json";
-import wordmark from "@/assets/tagveris-wordmark.png.asset.json";
 import { cn } from "@/lib/utils";
+
+// Served from /public so the logo works on any host (not only Lovable's asset CDN).
+const symbol = { url: "/brand/tagveris-symbol.png" };
+const wordmark = { url: "/brand/tagveris-wordmark.png" };
 
 type LogoProps = { className?: string; size?: "sm" | "md" | "lg"; linked?: boolean };
 

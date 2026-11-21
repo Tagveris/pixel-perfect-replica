@@ -124,16 +124,6 @@ function HomePage() {
                 height={1024}
               />
             </div>
-            <div className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border bg-card p-3.5 pr-5 text-card-foreground shadow-elevated sm:-left-8">
-              <span className="relative grid h-10 w-10 place-items-center rounded-full bg-success-soft text-success">
-                <span className="absolute inset-0 rounded-full bg-success/30 animate-pulse-ring" aria-hidden />
-                <BadgeCheck className="relative h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold">Registered product</p>
-                <p className="font-mono text-xs text-muted-foreground">TGV-7F3K-29QX</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
