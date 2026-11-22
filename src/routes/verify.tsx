@@ -25,9 +25,10 @@ import { DEMO_IDS, lookupDemoProduct, type VerificationResult, type VerifiedProd
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/verify")({
-  validateSearch: (search: Record<string, unknown>): { id?: string } => ({
-    id: typeof search.id === "string" && search.id.length > 0 ? search.id : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { id?: string } => {
+    const id = search["id"];
+    return typeof id === "string" && id.length > 0 ? { id } : {};
+  },
   head: () => ({
     meta: [
       { title: "Verify a Product — TAGVERIS" },

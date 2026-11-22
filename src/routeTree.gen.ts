@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ManufacturersRouteImport } from './routes/manufacturers'
@@ -17,12 +18,28 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminActivityRouteImport } from './routes/admin.activity'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as AdminManufacturersRouteImport } from './routes/admin.manufacturers'
+import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminTagsRouteImport } from './routes/admin.tags'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardScansRouteImport } from './routes/dashboard.scans'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as DashboardTagsRouteImport } from './routes/dashboard.tags'
 import { Route as DashboardProductsIndexRouteImport } from './routes/dashboard.products.index'
+import { Route as DashboardProductsProductIdRouteImport } from './routes/dashboard.products.$productId'
+import { Route as DashboardProductsNewRouteImport } from './routes/dashboard.products.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -60,9 +77,54 @@ const VerifyRoute = VerifyRouteImport.update({
   path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminActivityRoute = AdminActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminManufacturersRoute = AdminManufacturersRouteImport.update({
+  id: '/manufacturers',
+  path: '/manufacturers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTagsRoute = AdminTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardScansRoute = DashboardScansRouteImport.update({
+  id: '/scans',
+  path: '/scans',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTagsRoute = DashboardTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardProductsIndexRoute = DashboardProductsIndexRouteImport.update({
@@ -70,9 +132,21 @@ const DashboardProductsIndexRoute = DashboardProductsIndexRouteImport.update({
   path: '/products/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardProductsProductIdRoute =
+  DashboardProductsProductIdRouteImport.update({
+    id: '/products/$productId',
+    path: '/products/$productId',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardProductsNewRoute = DashboardProductsNewRouteImport.update({
+  id: '/products/new',
+  path: '/products/new',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/manufacturers': typeof ManufacturersRoute
@@ -80,7 +154,18 @@ export interface FileRoutesByFullPath {
   '/shop': typeof ShopRoute
   '/solutions': typeof SolutionsRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/manufacturers': typeof AdminManufacturersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/tags': typeof AdminTagsRoute
+  '/dashboard/scans': typeof DashboardScansRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tags': typeof DashboardTagsRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/products/$productId': typeof DashboardProductsProductIdRoute
+  '/dashboard/products/new': typeof DashboardProductsNewRoute
   '/dashboard/products/': typeof DashboardProductsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -91,12 +176,24 @@ export interface FileRoutesByTo {
   '/shop': typeof ShopRoute
   '/solutions': typeof SolutionsRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/manufacturers': typeof AdminManufacturersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/tags': typeof AdminTagsRoute
+  '/dashboard/scans': typeof DashboardScansRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tags': typeof DashboardTagsRoute
+  '/admin': typeof AdminIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/products/$productId': typeof DashboardProductsProductIdRoute
+  '/dashboard/products/new': typeof DashboardProductsNewRoute
   '/dashboard/products': typeof DashboardProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
   '/manufacturers': typeof ManufacturersRoute
@@ -104,13 +201,25 @@ export interface FileRoutesById {
   '/shop': typeof ShopRoute
   '/solutions': typeof SolutionsRoute
   '/verify': typeof VerifyRoute
+  '/admin/activity': typeof AdminActivityRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/manufacturers': typeof AdminManufacturersRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/tags': typeof AdminTagsRoute
+  '/dashboard/scans': typeof DashboardScansRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/tags': typeof DashboardTagsRoute
+  '/admin/': typeof AdminIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/products/$productId': typeof DashboardProductsProductIdRoute
+  '/dashboard/products/new': typeof DashboardProductsNewRoute
   '/dashboard/products/': typeof DashboardProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/dashboard'
     | '/login'
     | '/manufacturers'
@@ -118,7 +227,18 @@ export interface FileRouteTypes {
     | '/shop'
     | '/solutions'
     | '/verify'
+    | '/admin/activity'
+    | '/admin/audit'
+    | '/admin/manufacturers'
+    | '/admin/products'
+    | '/admin/tags'
+    | '/dashboard/scans'
+    | '/dashboard/settings'
+    | '/dashboard/tags'
+    | '/admin/'
     | '/dashboard/'
+    | '/dashboard/products/$productId'
+    | '/dashboard/products/new'
     | '/dashboard/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -129,11 +249,23 @@ export interface FileRouteTypes {
     | '/shop'
     | '/solutions'
     | '/verify'
+    | '/admin/activity'
+    | '/admin/audit'
+    | '/admin/manufacturers'
+    | '/admin/products'
+    | '/admin/tags'
+    | '/dashboard/scans'
+    | '/dashboard/settings'
+    | '/dashboard/tags'
+    | '/admin'
     | '/dashboard'
+    | '/dashboard/products/$productId'
+    | '/dashboard/products/new'
     | '/dashboard/products'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/dashboard'
     | '/login'
     | '/manufacturers'
@@ -141,12 +273,24 @@ export interface FileRouteTypes {
     | '/shop'
     | '/solutions'
     | '/verify'
+    | '/admin/activity'
+    | '/admin/audit'
+    | '/admin/manufacturers'
+    | '/admin/products'
+    | '/admin/tags'
+    | '/dashboard/scans'
+    | '/dashboard/settings'
+    | '/dashboard/tags'
+    | '/admin/'
     | '/dashboard/'
+    | '/dashboard/products/$productId'
+    | '/dashboard/products/new'
     | '/dashboard/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
   LoginRoute: typeof LoginRoute
   ManufacturersRoute: typeof ManufacturersRoute
@@ -163,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -214,11 +365,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/activity': {
+      id: '/admin/activity'
+      path: '/activity'
+      fullPath: '/admin/activity'
+      preLoaderRoute: typeof AdminActivityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/manufacturers': {
+      id: '/admin/manufacturers'
+      path: '/manufacturers'
+      fullPath: '/admin/manufacturers'
+      preLoaderRoute: typeof AdminManufacturersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tags': {
+      id: '/admin/tags'
+      path: '/tags'
+      fullPath: '/admin/tags'
+      preLoaderRoute: typeof AdminTagsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/scans': {
+      id: '/dashboard/scans'
+      path: '/scans'
+      fullPath: '/dashboard/scans'
+      preLoaderRoute: typeof DashboardScansRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/tags': {
+      id: '/dashboard/tags'
+      path: '/tags'
+      fullPath: '/dashboard/tags'
+      preLoaderRoute: typeof DashboardTagsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/products/': {
@@ -228,16 +442,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardProductsIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/products/$productId': {
+      id: '/dashboard/products/$productId'
+      path: '/products/$productId'
+      fullPath: '/dashboard/products/$productId'
+      preLoaderRoute: typeof DashboardProductsProductIdRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/products/new': {
+      id: '/dashboard/products/new'
+      path: '/products/new'
+      fullPath: '/dashboard/products/new'
+      preLoaderRoute: typeof DashboardProductsNewRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminActivityRoute: typeof AdminActivityRoute
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminManufacturersRoute: typeof AdminManufacturersRoute
+  AdminProductsRoute: typeof AdminProductsRoute
+  AdminTagsRoute: typeof AdminTagsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminActivityRoute: AdminActivityRoute,
+  AdminAuditRoute: AdminAuditRoute,
+  AdminManufacturersRoute: AdminManufacturersRoute,
+  AdminProductsRoute: AdminProductsRoute,
+  AdminTagsRoute: AdminTagsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface DashboardRouteChildren {
+  DashboardScansRoute: typeof DashboardScansRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardTagsRoute: typeof DashboardTagsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardProductsProductIdRoute: typeof DashboardProductsProductIdRoute
+  DashboardProductsNewRoute: typeof DashboardProductsNewRoute
   DashboardProductsIndexRoute: typeof DashboardProductsIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardScansRoute: DashboardScansRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardTagsRoute: DashboardTagsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardProductsProductIdRoute: DashboardProductsProductIdRoute,
+  DashboardProductsNewRoute: DashboardProductsNewRoute,
   DashboardProductsIndexRoute: DashboardProductsIndexRoute,
 }
 
@@ -247,6 +505,7 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
   LoginRoute: LoginRoute,
   ManufacturersRoute: ManufacturersRoute,

@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Marketing pages wrap content in `SiteLayout`; dashboards (`/dashboard/*`, `/admin/*`) use `AppShell` layout routes — keeps the public site chrome out of app screens.
+- Brand logo files are served from `public/brand/` (not the asset CDN) — the site is also deployed outside Lovable hosting.
+- All not-yet-connected features (verification lookup, auth, cart checkout, dashboard data) live in `src/lib/verify.ts`, `src/lib/cart.tsx`, `src/lib/demo-data.ts` and must stay visibly labelled as demo — the brief forbids pretending verification or auth is live.
+- Rules in `src/lib/verify.ts` and `src/lib/cart.tsx` are covered by `src/test/rules.test.ts`; update tests when the rules change.
