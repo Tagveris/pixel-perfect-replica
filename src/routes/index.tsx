@@ -22,7 +22,7 @@ import { IdentityPhone } from "@/components/site/IdentityPhone";
 import { SectionHeading } from "@/components/site/PageHero";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
-
+import { MerchSection } from "@/components/site/MerchSection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -323,6 +323,8 @@ function HomePage() {
           </div>
         </div>
       </section>
+      
+      <MerchSection />
     </SiteLayout>
   );
 }
