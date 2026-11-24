@@ -13,7 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/lib/cart";
-import { ChatAssistant } from "@/components/site/ChatAssistant";import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ChatAssistant } from "@/components/site/ChatAssistant";
+import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
