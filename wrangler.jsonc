@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pixel-perfect-replica",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2026-11-22",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tagveris-db",
+      "database_id": "5a538838-50fb-4697-8313-e6b0290ac320",
+      "migrations_dir": "migrations",
+      "preview_database_id": "8e99093c-c119-4aa6-9c95-37e52eb95421"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "env": {
+    "preview": {
+      "name": "pixel-perfect-replica-preview",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "tagveris-preview-db",
+          "database_id": "8e99093c-c119-4aa6-9c95-37e52eb95421",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}
