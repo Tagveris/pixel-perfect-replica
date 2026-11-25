@@ -17,5 +17,13 @@
       "preview_database_id": "8e99093c-c119-4aa6-9c95-37e52eb95421"
     }
   ],
+  "previews": {
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_id": "8e99093c-c119-4aa6-9c95-37e52eb95421"
+      }
+    ]
+  },
   "observability": { "enabled": true }
 }
