@@ -35,10 +35,18 @@ function jsonResponse(body: unknown, status = 200): Response {
   });
 }
 
-/** Worker-owned API endpoints are handled before TanStack SSR. */
+/** Worker-owned API endpoints are dispatched before TanStack SSR. */
 async function handleApi(request: Request, env: WorkerEnv): Promise<Response | null> {
   const { pathname } = new URL(request.url);
-  if (pathname !== "/api/health" && pathname !== "/api/db/health") return null;
+  const knownPaths = new Set([
+    "/api/health",
+    "/api/db/health",
+    "/api/products",
+    "/api/tags",
+    "/api/auth/session",
+  ]);
+  if (!pathname.startsWith("/api/")) return null;
+  if (!knownPaths.has(pathname)) return jsonResponse({ error: "API route not found" }, 404);
 
   if (request.method !== "GET") {
     return jsonResponse({ error: "Method not allowed" }, 405);
@@ -48,18 +56,29 @@ async function handleApi(request: Request, env: WorkerEnv): Promise<Response | n
     return jsonResponse({ ok: true, service: "pixel-perfect-replica" });
   }
 
-  if (!env.DB) {
-    return jsonResponse({ ok: false, error: "D1 binding DB is not configured" }, 503);
+  if (pathname === "/api/db/health") {
+    if (!env.DB) {
+      return jsonResponse({ ok: false, error: "D1 binding DB is not configured" }, 503);
+    }
+
+    try {
+      const result = await env.DB.prepare("SELECT 1 AS ok").first<{ ok: number }>();
+      if (result?.ok !== 1) throw new Error("D1 health query returned an unexpected result");
+      return jsonResponse({ ok: true, d1: true });
+    } catch (error) {
+      console.error("D1 health check failed", error);
+      return jsonResponse({ ok: false, error: "D1 is unavailable" }, 503);
+    }
   }
 
-  try {
-    const result = await env.DB.prepare("SELECT 1 AS ok").first<{ ok: number }>();
-    if (result?.ok !== 1) throw new Error("D1 health query returned an unexpected result");
-    return jsonResponse({ ok: true, d1: true });
-  } catch (error) {
-    console.error("D1 health check failed", error);
-    return jsonResponse({ ok: false, error: "D1 is unavailable" }, 503);
+  // No products/tags schema or authentication/session implementation exists in
+  // this repository yet. Return an explicit non-success response instead of
+  // inventing demo data or claiming that authentication is active.
+  if (pathname === "/api/products" || pathname === "/api/tags") {
+    return jsonResponse({ error: "This data API is not implemented yet" }, 501);
   }
+
+  return jsonResponse({ error: "Authentication/session support is not configured" }, 501);
 }
 
 // h3 swallows in-handler throws into a normal 500 Response with body

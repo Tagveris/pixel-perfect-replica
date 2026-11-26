@@ -20,7 +20,7 @@
   "observability": { "enabled": true },
   "env": {
     "preview": {
-      "name": "pixel-perfect-replica-preview",
+      "name": "tagveris-preview",
       "assets": {
         "directory": ".output/public",
         "binding": "ASSETS"
