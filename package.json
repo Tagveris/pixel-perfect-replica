@@ -8,7 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "preview:worker": "wrangler deploy --config wrangler.preview.jsonc",
+    "preview:worker": "wrangler preview",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
