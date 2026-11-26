@@ -21,6 +21,8 @@
   "env": {
     "preview": {
       "name": "tagveris-preview",
+      "compatibility_date": "2026-11-22",
+      "compatibility_flags": ["nodejs_compat"],
       "assets": {
         "directory": ".output/public",
         "binding": "ASSETS"
@@ -32,7 +34,8 @@
           "database_id": "8e99093c-c119-4aa6-9c95-37e52eb95421",
           "migrations_dir": "migrations"
         }
-      ]
+      ],
+      "observability": { "enabled": true }
     }
   }
 }
